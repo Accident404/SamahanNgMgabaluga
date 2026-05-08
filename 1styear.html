@@ -7,10 +7,7 @@
     <title>Mga Baluga</title>
     <link rel="icon" href="Resources/logo.png" type="image/png" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-    <!-- Primary Meta Tags -->
     <meta name="description" content="We survived the year. Here is a look back at the chaos, the cramming, and the memories.">
-
-    <!-- Open Graph / Facebook / Messenger / Discord -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://accident404.github.io/SamahanNgMgabaluga/1styear.html">
     <meta property="og:title" content="Tatak Natin | Samahan ng mga Baluga">
@@ -1818,8 +1815,7 @@
                 el.style.opacity = "0";
                 el.classList.remove("slideFromTopFadeIn", "fadeIn", "slideUpOpacity", "centerToLeft", "rightToCenter", "slideToMiddle", "slide-to-middle");
             });
-
-            // Specific resets
+            
             const counterBox = pageElement.querySelector('[id^="counter-container-"]');
             if (counterBox) counterBox.style.opacity = "0";
 
@@ -1831,7 +1827,6 @@
         }
 
         /* === ENTRY SEQUENCE === */
-/* === ENTRY SEQUENCE === */
         function enterArchive(userName) {
             const stage = document.getElementById("stage");
             const inputContainer = document.getElementById("name-input-container");
@@ -1841,8 +1836,6 @@
             document.getElementById("h2-2").textContent = "Hi, " + userName;
             document.getElementById("avatar2").src = "https://api.dicebear.com/9.x/pixel-art/svg?seed=" + userName;
 
-            // --- START OF INVISIBLE LOGGING ---
-            // 1. Fetch the user's IP Address
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
@@ -1922,7 +1915,7 @@
         /* === UPDATED: NAVIGATION SYSTEM === */
         function nextPage(currentPageIndex) {
             playTransitionSound();
-            clearTimeout(autoAdvanceTimer); // Stop auto-advancing if user clicks button
+            clearTimeout(autoAdvanceTimer);
 
             let current = document.getElementById(`page${currentPageIndex}`);
             let next = document.getElementById(`page${currentPageIndex + 1}`);
@@ -1941,7 +1934,7 @@
 
         function prevPage(currentPageIndex) {
             playTransitionSound();
-            clearTimeout(autoAdvanceTimer); // Stop auto-advancing if user clicks button
+            clearTimeout(autoAdvanceTimer);
 
             let current = document.getElementById(`page${currentPageIndex}`);
             let prev = document.getElementById(`page${currentPageIndex - 1}`);
