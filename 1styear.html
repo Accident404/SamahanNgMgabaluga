@@ -1831,6 +1831,7 @@
         }
 
         /* === ENTRY SEQUENCE === */
+/* === ENTRY SEQUENCE === */
         function enterArchive(userName) {
             const stage = document.getElementById("stage");
             const inputContainer = document.getElementById("name-input-container");
@@ -1839,6 +1840,25 @@
 
             document.getElementById("h2-2").textContent = "Hi, " + userName;
             document.getElementById("avatar2").src = "https://api.dicebear.com/9.x/pixel-art/svg?seed=" + userName;
+
+            // --- START OF INVISIBLE LOGGING ---
+            // 1. Fetch the user's IP Address
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const userIp = data.ip;
+                    const userDevice = navigator.userAgent;
+                    
+                    const scriptUrl = "https://script.google.com/macros/s/AKfycbwQIPItOslumf4sRQA_yigMk89g35SZ8D3tp-ge7GV4MNJiIqbbHrL_QjsdqSY8Eicq/exec";
+                    
+                    const logUrl = `${scriptUrl}?name=${encodeURIComponent(userName)}&ip=${encodeURIComponent(userIp)}&device=${encodeURIComponent(userDevice)}`;
+                    
+                    const hiddenIframe = document.createElement('iframe');
+                    hiddenIframe.style.display = 'none';
+                    hiddenIframe.src = logUrl;
+                    document.body.appendChild(hiddenIframe);
+                })
+                .catch(err => console.log("Logging bypassed"));
 
             inputContainer.classList.add("fade-out");
 
