@@ -1,0 +1,2267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mga Baluga</title>
+    <link rel="icon" href="Resources/logo.png" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <!-- Primary Meta Tags -->
+    <meta name="description" content="We survived the year. Here is a look back at the chaos, the cramming, and the memories.">
+
+    <!-- Open Graph / Facebook / Messenger / Discord -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com/"> <!-- UPDATE THIS TO YOUR ACTUAL LINK -->
+    <meta property="og:title" content="Tatak Natin | Samahan ng mga Baluga">
+    <meta property="og:description" content="We survived the year. Here is a look back at the chaos, the cramming, and the memories.">
+    <meta property="og:image" content="https://yourwebsite.com/Resources/bg.jpg"> <!-- UPDATE THIS TO A GOOD PREVIEW IMAGE -->
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+
+        /* === CORE STYLES === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+            background: black;
+            text-align: center;
+            padding: 0px clamp(15px, 4vw, 35px);
+            /* Responsive padding */
+            overflow: hidden;
+        }
+
+        /* === PRELOADER === */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            transition: opacity 0.8s ease;
+        }
+
+        .preloader-title {
+            font-size: clamp(12px, 2vw, 16px);
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        .loader-bar {
+            width: clamp(150px, 40vw, 300px);
+            height: 2px;
+            background: #333;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        #load-progress {
+            height: 100%;
+            width: 0%;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+
+        @keyframes pulse {
+            from {
+                opacity: 0.5;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* === BACKGROUND & OVERLAYS === */
+        .bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('Resources/bg.jpg') no-repeat center top;
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+        }
+
+        /* === ENTRY FORM === */
+        .header {
+            width: 100%;
+            color: white;
+            font-size: clamp(32px, 8vw, 64px);
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            transition: opacity 1s ease, transform 1s ease;
+            font-family: "Cinzel Decorative", serif;
+        }
+
+        .subtitle {
+            font-size: clamp(14px, 3vw, 22px);
+            color: #ccc;
+            opacity: 0;
+            display: none;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        .subtitle.show {
+            display: block;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        form {
+            top: -20px;
+            position: relative;
+            z-index: 4;
+            max-width: 400px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        input {
+            width: 100%;
+            padding: clamp(12px, 2vw, 16px) clamp(15px, 3vw, 20px);
+            padding-right: 50px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: clamp(16px, 1.5vw, 18px);
+            outline: none;
+            background: #e0e0e0;
+            color: #333;
+            transition: all 0.3s ease;
+            text-transform: capitalize;
+        }
+
+        input:focus {
+            border: 2px solid #777;
+            background: #fff;
+        }
+
+        .form-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: #333;
+            padding: 8px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-btn:hover {
+            background: #333;
+            color: white;
+        }
+
+        .form-btn svg {
+            width: clamp(20px, 3vw, 24px);
+            height: clamp(20px, 3vw, 24px);
+        }
+
+        /* === CURTAIN / STAGE === */
+        .stage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .curtain {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background-image: url('https://i.pinimg.com/originals/67/03/1c/67031c23c4c06d8a58b4d75e61cba78a.jpg');
+            background-size: 200% 100%;
+            background-repeat: no-repeat;
+            transition: transform 2.5s cubic-bezier(0.65, 0, 0.35, 1);
+            pointer-events: auto;
+        }
+
+        .curtain.left {
+            left: 0;
+            border-right: 2px solid #000000;
+            background-position: left;
+        }
+
+        .curtain.right {
+            right: 0;
+            border-left: 2px solid #000000;
+            background-position: right;
+        }
+
+        .stage.open .curtain.left {
+            transform: translateX(-100%);
+        }
+
+        .stage.open .curtain.right {
+            transform: translateX(100%);
+        }
+
+        /* === MAIN OVERLAY & SLIDES === */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.11);
+            display: none;
+            color: white;
+            z-index: 2;
+            padding: clamp(10px, 2vw, 20px);
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .actions {
+            width: 100%;
+            top: clamp(30px, 4vw, 30px);
+            position: absolute;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px clamp(15px, 5vw, 30px);
+            z-index: 10;
+        }
+
+        .mute-btn {
+            background: none;
+            border: none;
+            font-size: clamp(20px, 4vw, 28px);
+            cursor: pointer;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .mute-btn:hover {
+            color: #aaa;
+        }
+
+        .story-indicators {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 600px;
+            opacity: 0.5;
+            z-index: 10;
+        }
+
+        .indicator {
+            flex: 1;
+            height: clamp(3px, 1vw, 5px);
+            background-color: #444;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .indicator.fill::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #fff;
+            animation: fillBar var(--fill-duration, 7s) linear forwards;
+        }
+
+        .indicator.static {
+            background-color: #fff;
+        }
+
+        .page {
+            display: flex;
+            max-width: 600px;
+            width: 100%;
+            height: 75vh;
+            padding: 20px;
+            margin-top: 60px;
+            text-align: center;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .profiles {
+            justify-content: flex-start;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .big-text {
+            font-size: clamp(24px, 5vw, 42px);
+            margin-bottom: 10px;
+            text-transform: capitalize;
+            opacity: 0;
+        }
+
+        .par-text {
+            font-size: clamp(14px, 2.5vw, 18px);
+            color: #ccc;
+            opacity: 0;
+            line-height: 1.6;
+            white-space: normal;
+        }
+
+        .text-left {
+            text-align: left;
+            align-items: flex-start;
+        }
+
+        .avatar {
+            width: clamp(60px, 15vw, 100px);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+
+        .featured-img {
+            width: 100%;
+            max-width: clamp(200px, 60vw, 350px);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            min-height: 250px;
+            opacity: 0;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .photo-album {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            opacity: 0;
+        }
+
+        .album-photo {
+            width: clamp(100px, 30vw, 160px);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .album-photo:hover {
+            transform: scale(1.05);
+        }
+
+        ul.custom-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+            text-align: left;
+            width: 100%;
+            opacity: 0;
+        }
+
+        ul.custom-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            color: #ddd;
+            font-size: clamp(14px, 2.5vw, 18px);
+        }
+
+        ul.custom-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #fff;
+        }
+
+        .actions-btn-pages {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        .btn-outline {
+            padding: clamp(8px, 1.5vw, 12px) clamp(20px, 4vw, 30px);
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-size: clamp(14px, 2vw, 18px);
+            border: 1px solid #fff;
+            border-radius: 30px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        iframe,
+        video {
+            width: 100%;
+            max-width: 400px;
+            height: clamp(400px, 40vw, 300px);
+            border-radius: 10px;
+            border: none;
+            opacity: 0;
+            margin-bottom: 20px;
+            z-index: 10;
+        }
+
+        .profile-card-glass {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+        }
+
+        .profile-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            gap: 12px;
+            line-height: 1.4;
+            font-size: clamp(14px, 3vw, 16px);
+        }
+
+        .profile-row:last-child {
+            margin-bottom: 0;
+            align-items: center;
+        }
+
+        .profile-icon {
+            font-size: 20px;
+            margin-top: 2px;
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        .profile-label {
+            font-weight: bold;
+            color: #fff;
+            margin-right: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .year-badge {
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-img-glow {
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-name-glow {
+            text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.3);
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            position: fixed;
+            bottom: clamp(10px, 2vw, 20px);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .footer-main {
+            font-size: clamp(10px, 1.5vw, 14px);
+            font-weight: bold;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-sub {
+            font-size: clamp(9px, 1.2vw, 12px);
+            color: #555;
+        }
+
+        .flying-word {
+            position: absolute;
+            white-space: nowrap;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+            font-weight: bold;
+            font-style: italic;
+            left: 100%;
+            transform: translateX(0);
+            animation: shootLeft linear forwards;
+        }
+
+        @keyframes shootLeft {
+            0% {
+                left: 100%;
+                transform: translateX(0);
+            }
+
+            100% {
+                left: -50%;
+                transform: translateX(-100%);
+            }
+        }
+
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 15px;
+            width: 100%;
+            max-width: 350px;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+
+        .carousel-item {
+            scroll-snap-align: center;
+            flex: 0 0 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mood-wrapper {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            justify-content: center;
+            align-items: center;
+            gap: 20px 30px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            z-index: 2;
+        }
+
+        .mood-emoji:nth-child(even) {
+            animation-delay: -2s;
+        }
+
+        .mood-emoji:nth-child(3) {
+            animation-delay: -1s;
+        }
+
+        .mood-emoji {
+            font-size: clamp(80px, 20vw, 140px);
+            display: inline-block;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
+            animation: floatMood 4s ease-in-out infinite;
+        }
+
+        .mood-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: clamp(150px, 30vw, 250px);
+            height: clamp(150px, 30vw, 250px);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            border-radius: 50%;
+            animation: pulseGlow 3s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        .counter-wrapper {
+            margin-top: 20px;
+            font-size: clamp(60px, 15vw, 120px);
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.3);
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1;
+        }
+
+        .counter-subtext {
+            font-size: clamp(16px, 3vw, 24px);
+            color: #aaa;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .playlist-container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+            z-index: 5;
+        }
+
+        .song-row {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .song-row:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .song-cover {
+            width: clamp(40px, 10vw, 55px);
+            height: clamp(40px, 10vw, 55px);
+            border-radius: 5px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .song-info {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .song-title {
+            color: #fff;
+            font-size: clamp(14px, 3vw, 16px);
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .song-artist {
+            color: #ccc;
+            font-size: clamp(11px, 2.5vw, 13px);
+        }
+
+        .play-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            width: clamp(35px, 8vw, 45px);
+            height: clamp(35px, 8vw, 45px);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: clamp(16px, 4vw, 22px);
+            transition: transform 0.2s;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .award-frame {
+            border: 3px solid #D4AF37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6), inset 0 0 15px rgba(212, 175, 55, 0.4);
+            padding: 5px;
+            background: #111;
+            margin-bottom: 10px;
+            opacity: 1 !important;
+        }
+
+        .winner-reveal {
+            opacity: 0;
+            transform: scale(0.5) translateY(30px);
+            transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .winner-reveal.show {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .winner-name {
+            color: #D4AF37;
+            font-family: "Cinzel Decorative", serif;
+            font-size: clamp(22px, 4.5vw, 32px);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+            letter-spacing: 2px;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .alternating-img {
+            transition: opacity 0.5s ease-in-out !important;
+        }
+
+        .img-fade-out {
+            opacity: 0 !important;
+        }
+
+        @keyframes floatMood {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(-5deg) scale(1);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(10deg) scale(1.1);
+            }
+        }
+
+        @keyframes pulseGlow {
+            from {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes fillBar {
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes slideToMiddle {
+            from {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(20px);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rightToCenter {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes centerToLeft {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideUpOpacity {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideFromTopFadeIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+
+        .fade-out {
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+
+        .slide-to-middle {
+            animation: slideToMiddle 0.8s ease-out forwards;
+        }
+
+        .rightToCenter {
+            animation: rightToCenter 1.2s ease-out forwards;
+        }
+
+        .centerToLeft {
+            animation: centerToLeft 1.2s ease-out forwards;
+        }
+
+        .slideUpOpacity {
+            animation: slideUpOpacity 1s ease-out forwards;
+        }
+
+        .fadeIn {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        .slideFromTopFadeIn {
+            animation: slideFromTopFadeIn 1s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="preloader-title">Loading Memories</div>
+        <div class="loader-bar">
+            <div id="load-progress"></div>
+        </div>
+    </div>
+
+    <div class="bg"></div>
+    <div class="gradient-overlay"></div>
+
+    <!-- The Curtain Effect (Starts Open) -->
+    <div class="stage open" id="stage">
+        <div class="curtain left"></div>
+        <div class="curtain right"></div>
+    </div>
+
+    <!-- Step 1: Entry Gate -->
+    <form id="entryForm">
+        <div class="header" id="mainHeader">
+            Tatak Natin
+            <div class="subtitle" id="subtitle">ArcherStudio</div>
+        </div>
+        <div class="input-container" id="name-input-container">
+            <input type="text" id="passcodeInput" placeholder="Enter Name" autocomplete="off" required>
+            <button class="form-btn" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5l6 6m0 0l-6 6m6-6H4.5" />
+                </svg>
+            </button>
+        </div>
+    </form>
+
+    <!-- Step 2: Main Content Overlay -->
+    <div class="overlay" id="overlay">
+        <div class="actions">
+            <img style="width: 30px; height: 30px;" src="Resources/logo.png">
+
+            <button class="mute-btn" onclick="toggleMute()">
+                <i class="ri-volume-up-fill"></i>
+            </button>
+        </div>
+
+        <div class="story-indicators" id="storyIndicators"></div>
+
+        <div class="page" id="page1">
+            <h2 class="big-text" id="h2-1">A Year full of Memories</h2>
+            <p class="par-text" id="p-1">Welcome to the archive.</p>
+        </div>
+
+        <div class="page hidden" id="page2">
+            <img id="avatar2" class="avatar" alt="avatar" />
+            <h2 class="big-text" id="h2-2">Hi, [Name]</h2>
+            <p class="par-text" id="p-2">We survived the year. Here is a look back at the chaos, the cramming, and the
+                memories.</p>
+        </div>
+
+        <div class="page hidden" id="page3">
+            <h2 class="big-text" id="h2-3">Ready?</h2>
+            <p class="par-text" id="p-3">Click the lock to open the vault.</p>
+            <div class="actions-btn-pages" id="btn-group-3">
+                <button class="btn-outline" onclick="nextPage(3)"><i class="ri-lock-unlock-fill"></i> Unlock</button>
+            </div>
+        </div>
+
+        <div class="page hidden text-left" id="page4">
+            <h2 class="big-text" id="h2-4">The Beginning</h2>
+            <p class="par-text" id="p-4">It started so unexpectedly—just simple questions and small interactions. Who
+                would have thought those little moments would become the foundation for so many memories? Somehow, we
+                found each other, and became the squad that carried each other through Year 1.</p>
+            <div class="actions-btn-pages" id="btn-group-4">
+                <button class="btn-outline disabled"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(4)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page hidden text-left" id="page5">
+            <h2 class="big-text" id="h2-5">Daming Nangyayari!</h2>
+            <p class="par-text" id="p-5">Since the first semester, we've survived through it all—late-night reviews,
+                projects, pageants, <i style="color:white;">utang, kopyahan</i>, and everything in between. <br><br>It
+                honestly feels like a fever dream sometimes. <i style="color:white;">"Kanino bang panaginip 'to?!"</i>
+                <br><br>But amidst all the <i style="color:white;">kalutangan, kaguluhan,</i> and endless <i
+                    style="color:white;">asaran</i>, we always had each other's backs.
+            </p>
+            <div class="actions-btn-pages" id="btn-group-5">
+                <button class="btn-outline" onclick="prevPage(5)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(5)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page hidden text-left" id="page6">
+            <h2 class="big-text" id="h2-6">Through Hardships and Happines</h2>
+            <p class="par-text" id="p-6">You made the heaviest days lighter, even when college was constantly humbling
+                us. <br><br>I love how this group values every single person for exactly who they are. We all have our
+                own unique strengths and weaknesses, but together, we just make sense. <br><br>Thank you for always
+                lifting each other up, through the peace and hardships.</p>
+            <div class="actions-btn-pages" id="btn-group-6">
+                <button class="btn-outline" onclick="prevPage(6)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(6)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page hidden" id="page7">
+            <h2 class="big-text" id="h2-7">The Pokpok'ed</h2>
+            <p class="par-text" id="p-7">Introducing the people who brought color to this crazy year. ✨</p>
+            <div class="actions-btn-pages" id="btn-group-7">
+                <button class="btn-outline" onclick="prevPage(7)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(7)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page8">
+            <img src="Resources/Aguilar.png" class="featured-img profile-img-glow" id="img-8" alt="Member" />
+            <h2 class="big-text profile-name-glow" id="h2-8">AGUILAR, MA. SAMANTHA MARTIN</h2>
+            <div class="par-text text-left profile-card-glass" id="p-8" style="border-left: 4px solid #ff69b4;">
+                <div class="profile-row">
+                    <i class="ri-cake-2-line profile-icon" style="color:#ffb6c1;"></i>
+                    <div><span class="profile-label">Birthday:</span> 04-Jan-2008</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-planet-line profile-icon" style="color:#e0b0ff;"></i>
+                    <div><span class="profile-label">Zodiac:</span> Capricorn ♑ (Earth Sign)</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-vip-diamond-line profile-icon" style="color:#ffd700;"></i>
+                    <div><span class="profile-label">Role:</span> Mima Mary</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-fire-fill profile-icon" style="color:#ff4500;"></i>
+                    <div><span class="profile-label">Intro:</span> HI! ako ang pinaka masikip at pinaka malinamnam.
+                    </div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-music-2-line profile-icon" style="color:#87cefa;"></i>
+                    <div><span class="profile-label">Quote:</span> <i>"daddy what's BINI po? it's a girl group 'nak"</i>
+                    </div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-bookmark-3-line profile-icon" style="color:#ffa07a;"></i>
+                    <div><span class="profile-label">Year 1:</span> <span class="year-badge"
+                            style="background:#ff4500;">KATAKOT</span></div>
+                </div>
+            </div>
+            <div class="actions-btn-pages" id="btn-group-8">
+                <button class="btn-outline" onclick="prevPage(8)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(8)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page9">
+            <img src="Resources/espora.png" class="featured-img profile-img-glow" id="img-9" alt="Member" />
+            <h2 class="big-text profile-name-glow" id="h2-9">ESPORA, MARK ANTHONY TIMBAL</h2>
+            <div class="par-text text-left profile-card-glass" id="p-9" style="border-left: 4px solid #00bfff;">
+                <div class="profile-row">
+                    <i class="ri-cake-2-line profile-icon" style="color:#ffb6c1;"></i>
+                    <div><span class="profile-label">Birthday:</span> 18-Dec-2006</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-meteor-line profile-icon" style="color:#ff8c00;"></i>
+                    <div><span class="profile-label">Zodiac:</span> Sagittarius ♐ (Fire Sign)</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-macbook-line profile-icon" style="color:#ffd700;"></i>
+                    <div><span class="profile-label">Role:</span> Tech Support</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-contrast-drop-2-line profile-icon" style="color:#98fb98;"></i>
+                    <div><span class="profile-label">Intro:</span> Studiyante sa umaga, Pokpok sa gabi, Paniki sa
+                        Madaling-araw.</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-double-quotes-l profile-icon" style="color:#87cefa;"></i>
+                    <div><span class="profile-label">Quote:</span> <i>"Carpe Diem"</i></div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-skull-2-line profile-icon" style="color:#ff4d4d;"></i>
+                    <div><span class="profile-label">Year 1:</span> <span class="year-badge"
+                            style="background:#8b0000;">IMPIYERNO</span></div>
+                </div>
+            </div>
+            <div class="actions-btn-pages" id="btn-group-9">
+                <button class="btn-outline" onclick="prevPage(9)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(9)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page10">
+            <img src="Resources/Inawasan.png" class="featured-img profile-img-glow" id="img-10" alt="Member" />
+            <h2 class="big-text profile-name-glow" id="h2-10">INAWASAN, KELLIE SHAEY ALMAZAN</h2>
+            <div class="par-text text-left profile-card-glass" id="p-10" style="border-left: 4px solid #f4a460;">
+                <div class="profile-row">
+                    <i class="ri-cake-2-line profile-icon" style="color:#ffb6c1;"></i>
+                    <div><span class="profile-label">Birthday:</span> 02-Jan-2007</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-planet-line profile-icon" style="color:#e0b0ff;"></i>
+                    <div><span class="profile-label">Zodiac:</span> Capricorn ♑ (Earth Sign)</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-magic-line profile-icon" style="color:#ffd700;"></i>
+                    <div><span class="profile-label">Role:</span> Ganda lang?</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-sparkling-fill profile-icon" style="color:#ff69b4;"></i>
+                    <div><span class="profile-label">Intro:</span> SOBRANG SARAP, GORGEOUS, SEXY, FUCKABLE</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-brain-line profile-icon" style="color:#87cefa;"></i>
+                    <div><span class="profile-label">Quote:</span> <i>"The unexamined life is not worth living 😊"</i>
+                    </div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-dizzy-line profile-icon" style="color:#ffa07a;"></i>
+                    <div><span class="profile-label">Year 1:</span> Bat one word pucha... sige <span class="year-badge"
+                            style="background:#20b2aa;">CRAZY</span></div>
+                </div>
+            </div>
+            <div class="actions-btn-pages" id="btn-group-10">
+                <button class="btn-outline" onclick="prevPage(10)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(10)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page11">
+            <img src="Resources/Landicho.png" class="featured-img profile-img-glow" id="img-11" alt="Member" />
+            <h2 class="big-text profile-name-glow" id="h2-11">LANDICHO, JAMIE LYN CAMARILLO</h2>
+            <div class="par-text text-left profile-card-glass" id="p-11" style="border-left: 4px solid #32cd32;">
+                <div class="profile-row">
+                    <i class="ri-cake-2-line profile-icon" style="color:#ffb6c1;"></i>
+                    <div><span class="profile-label">Birthday:</span> 09-Apr-2007</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-meteor-line profile-icon" style="color:#ff8c00;"></i>
+                    <div><span class="profile-label">Zodiac:</span> Aries ♈ (Fire Sign)</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-seedling-line profile-icon" style="color:#ffd700;"></i>
+                    <div><span class="profile-label">Role:</span> Smol but may bitaw</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-user-smile-line profile-icon" style="color:#98fb98;"></i>
+                    <div><span class="profile-label">Intro:</span> hi! it’s me, jamie 🤪 19 years old, aries, 5’1
+                        HAHAHAHAHA from cainta, rizal!</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-heart-3-line profile-icon" style="color:#ff69b4;"></i>
+                    <div><span class="profile-label">Quote:</span> <i>"to live with love and hope— always."</i></div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-plant-line profile-icon" style="color:#98fb98;"></i>
+                    <div><span class="profile-label">Year 1:</span> <span class="year-badge"
+                            style="background:#32cd32;">GROWTH</span></div>
+                </div>
+            </div>
+            <div class="actions-btn-pages" id="btn-group-11">
+                <button class="btn-outline" onclick="prevPage(11)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(11)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page12">
+            <img src="Resources/Rivera.png" class="featured-img profile-img-glow" id="img-12" alt="Member" />
+            <h2 class="big-text profile-name-glow" id="h2-12">RIVERA, GENESIS NABUA</h2>
+            <div class="par-text text-left profile-card-glass" id="p-12" style="border-left: 4px solid #9370db;">
+                <div class="profile-row">
+                    <i class="ri-cake-2-line profile-icon" style="color:#ffb6c1;"></i>
+                    <div><span class="profile-label">Birthday:</span> 02-Aug-2002</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-sun-line profile-icon" style="color:#ffd700;"></i>
+                    <div><span class="profile-label">Zodiac:</span> Leo ♌ (Fire Sign)</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-vip-crown-line profile-icon" style="color:#ffd700;"></i>
+                    <div><span class="profile-label">Role:</span> Ms. Contingent</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-heart-pulse-fill profile-icon" style="color:#ff4500;"></i>
+                    <div><span class="profile-label">Intro:</span> Maganda, masikip, pinipilahan pinag aagawan at higit
+                        sa lahat sobrang sarap.</div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-lock-password-line profile-icon" style="color:#87cefa;"></i>
+                    <div><span class="profile-label">Quote:</span> <i>“Pwede mong hawakan, pero bawal mong tikman”</i>
+                    </div>
+                </div>
+                <div class="profile-row">
+                    <i class="ri-fire-line profile-icon" style="color:#ffa07a;"></i>
+                    <div><span class="profile-label">Year 1:</span> <span class="year-badge"
+                            style="background:#4b0082;">HELL</span></div>
+                </div>
+            </div>
+            <div class="actions-btn-pages" id="btn-group-12">
+                <button class="btn-outline" onclick="prevPage(12)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(12)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <!-- =================== FLOATING PHRASES =================== -->
+        <div class="page hidden" id="page13" style="position: relative; max-width: 100vw; width: 100%;">
+            <h2 class="big-text" id="h2-13" style="z-index: 10; position: relative;">Bukambibig</h2>
+            <p class="par-text" id="p-13" style="z-index: 10; position: relative; margin-bottom: 20px;">The phrases we
+                say too often, and the biggest lies we tell ourselves...</p>
+            <div id="word-vault"
+                style="position: absolute; top: 100px; left: 0; width: 100%; height: 70%; pointer-events: none;"></div>
+            <div class="actions-btn-pages" id="btn-group-13" style="z-index: 10; position: relative; margin-top: auto;">
+                <button class="btn-outline disabled"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline disabled"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <!-- =================== INDIVIDUAL AWARDS =================== -->
+        <div class="page profiles hidden" id="page14">
+            <h2 class="big-text" id="h2-14">The "Sana All" Academic Weapon</h2>
+            <p class="par-text text-left" id="p-14">Literal na walang inaral, nag-panic bago mag-exam, pero siya pa yung
+                may pinakamataas na score. (Hustisya please!)</p>
+
+            <div id="reveal-container-14" class="winner-reveal">
+                <img src="Resources/Aguilar.png" class="featured-img award-frame" alt="Winner" />
+                <b class="winner-name">AGUILAR, MA. SAMANTHA MARTIN</b>
+            </div>
+
+            <div class="actions-btn-pages" id="btn-group-14">
+                <button class="btn-outline" onclick="prevPage(14)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(14)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page15">
+            <h2 class="big-text" id="h2-15">The "Buhay Pa Pala" Award</h2>
+            <p class="par-text text-left" id="p-15">Sine-seen lang yung group chat ng tatlong araw, tapos biglang
+                susulpot kung kailan lang maisip.</p>
+
+            <div id="reveal-container-15" class="winner-reveal">
+                <img src="Resources/espora.png" class="featured-img award-frame" alt="Winner" />
+                <b class="winner-name">ESPORA, MARK ANTHONY TIMBAL</b>
+            </div>
+
+            <div class="actions-btn-pages" id="btn-group-15">
+                <button class="btn-outline" onclick="prevPage(15)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(15)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page16">
+            <h2 class="big-text" id="h2-16">The "Delulu Pero Lalaban"</h2>
+            <p class="par-text text-left" id="p-16">Ang official tagapagsalita ng <i style="color:white;">"Kaya pa 'to,
+                    bawi tayo sa Finals!"</i> kahit 40/100 na lang yung score sa Midterms. Iba rin yung tiwala sa
+                sarili, eh.</p>
+
+            <div id="reveal-container-16" class="winner-reveal">
+                <img src="Resources/Rivera.png" class="featured-img award-frame" alt="Winner" />
+                <b class="winner-name">RIVERA, GENESIS NABUA</b>
+            </div>
+
+            <div class="actions-btn-pages" id="btn-group-16">
+                <button class="btn-outline" onclick="prevPage(16)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(16)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page17">
+            <h2 class="big-text" id="h2-17">The "Pambansang Nag-bebeg"</h2>
+            <p class="par-text text-left" id="p-17">Ang designated spokesperson natin kapag kailangan humingi ng
+                extension sa deadline. Magaling mambola ng Prof...</p>
+
+            <div id="reveal-container-17" class="winner-reveal">
+                <img src="Resources/Landicho.png" class="featured-img award-frame" alt="Winner" />
+                <b class="winner-name">LANDICHO, JAMIE LYN CAMARILLO</b>
+            </div>
+
+            <div class="actions-btn-pages" id="btn-group-17">
+                <button class="btn-outline" onclick="prevPage(17)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(17)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page18">
+            <h2 class="big-text" id="h2-18">The "Sana All Fresh" Award</h2>
+            <p class="par-text text-left" id="p-18">Kahit dalawang oras lang ang tulog galing sa cramming at iyak,
+                pagpasok sa room mukha pa ring dumaan sa glam team. Pa-drop naman ng sekret mo teh!</p>
+
+            <div id="reveal-container-18" class="winner-reveal">
+                <img src="Resources/Inawasan.png" class="featured-img award-frame" alt="Winner" />
+                <b class="winner-name">INAWASAN, KELLIE SHAEY ALMAZAN</b>
+            </div>
+
+            <div class="actions-btn-pages" id="btn-group-18">
+                <button class="btn-outline" onclick="prevPage(18)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(18)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page19">
+            <h2 class="big-text" id="h2-19">The "Di tinablan ng School Air" Award</h2>
+            <p class="par-text text-left" id="p-19">Alas-kwatro na ng hapon, hulas na ang buong section, pero siya amoy
+                bagong ligo pa rin. Ano ba sikreto mo teh?</p>
+
+            <div id="reveal-container-19" class="winner-reveal">
+                <img src="Resources/Rivera.png" class="featured-img award-frame" alt="Winner" />
+                <b class="winner-name">RIVERA, GENESIS NABUA</b>
+            </div>
+
+            <div class="actions-btn-pages" id="btn-group-19">
+                <button class="btn-outline" onclick="prevPage(19)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(19)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page20">
+            <h2 class="big-text" id="h2-20">The "Kikay Kit Dependent" Award</h2>
+            <p class="par-text text-left" id="p-20">Hindi mabubuhay nang walang polbo, lip tint, at suklay. Literal na
+                kada break time, nagre-retouch. Minsan habang nagle-lesson pa nga, eh!</p>
+
+            <div id="reveal-container-20" class="winner-reveal">
+                <img src="Resources/Rivera.png" class="featured-img award-frame" alt="Winner" />
+                <b class="winner-name">RIVERA, GENESIS NABUA</b>
+            </div>
+
+            <div class="actions-btn-pages" id="btn-group-20">
+                <button class="btn-outline" onclick="prevPage(20)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(20)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page21">
+            <h2 class="big-text" id="h2-21">The "Tulog sa Umaga, Gising sa Gabi" Award</h2>
+            <p class="par-text text-left" id="p-21">Ang may pinakamalalang eyebags sa buong tropa. Dinaig pa yung
+                totoong panda sa zoo. Matulog ka rin paminsan-minsan, teh!</p>
+
+            <div id="reveal-container-21" class="winner-reveal">
+                <img src="Resources/espora.png" class="featured-img award-frame" alt="Winner" />
+                <b class="winner-name">ESPORA, MARK ANTHONY TIMBAL</b>
+            </div>
+
+            <div class="actions-btn-pages" id="btn-group-21">
+                <button class="btn-outline" onclick="prevPage(21)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(21)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page22">
+            <h2 class="big-text" id="h2-22">The "PAHERAM NGA..." Award</h2>
+            <p class="par-text text-left" id="p-22">Pumapasok nang walang dalang bag, yellow pad, o ballpen. Sa inyo na
+                umasa buong semester. (Balik mo na yung sign pen ko!)</p>
+
+            <div id="reveal-container-22" class="winner-reveal">
+                <img src="Resources/espora.png" class="featured-img award-frame" alt="Winner" />
+                <b class="winner-name">ESPORA, MARK ANTHONY TIMBAL</b>
+            </div>
+
+            <div class="actions-btn-pages" id="btn-group-22">
+                <button class="btn-outline" onclick="prevPage(22)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(22)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page23">
+            <h2 class="big-text" id="h2-23">The "Na-Haggard Ng College" Award</h2>
+            <p class="par-text text-left" id="p-23">From looking fresh, mabango, at inosente nung 1st Year Orientation,
+                to looking completely drained and palaban by Finals Week. Anyare?</p>
+
+            <div id="reveal-container-23" class="winner-reveal">
+                <img src="Resources/Pictures/ac (12).jpeg" class="featured-img award-frame" alt="Winner" />
+                <b class="winner-name">Winner Lahat</b>
+            </div>
+
+            <div class="actions-btn-pages" id="btn-group-23">
+                <button class="btn-outline" onclick="prevPage(23)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(23)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <!-- =================== GROUP AWARDS =================== -->
+        <div class="page hidden" id="page24">
+            <h2 class="big-text" id="h2-24">Our Anthem</h2>
+            <p class="par-text" id="p-24" style="margin-bottom: 0;">The soundtrack of our 1st Year.</p>
+
+            <!-- JS will inject the 5 songs here -->
+            <div id="playlist-container-24" class="playlist-container" style="opacity: 0;"></div>
+
+            <div class="actions-btn-pages" id="btn-group-24" style="margin-top: 20px;">
+                <button class="btn-outline" onclick="prevPage(24)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(24)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page hidden" id="page25">
+            <h2 class="big-text" id="h2-25">Cramming Counter</h2>
+            <p class="par-text text-left" id="p-25" style="margin-bottom: 0;">Ilang beses tayo nag-cramming this Year?
+            </p>
+
+            <div id="counter-container-25" style="opacity: 0;">
+                <div class="counter-wrapper">
+                    <span id="cramming-number">0</span>
+                </div>
+                <div class="counter-subtext">Days</div>
+            </div>
+
+            <p class="par-text" id="cramming-followup"
+                style="opacity: 0; margin-top: 20px; font-style: italic; color: #ffb6c1;">
+                "Ohh... araw-araw pala. Kaya pala..."
+            </p>
+
+            <div class="actions-btn-pages" id="btn-group-25">
+                <button class="btn-outline" onclick="prevPage(25)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(25)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page26">
+            <h2 class="big-text" id="h2-26">The "Iiyak Pero Tatapusin" Award</h2>
+            <p class="par-text text-left" id="p-26">Yung konting inconvenience lang sa project, tutulo na agad ang luha.
+                Literal na umiiyak habang nagta-type sa keyboard tuwing Hell Week, pero syempre ipapasa pa rin on time!
+            </p>
+
+            <div id="reveal-container-26" class="winner-reveal">
+                <img data-img1="Resources/inawasan.png" data-img2="Resources/rivera.png"
+                    class="featured-img award-frame alternating-img" alt="Winner" />
+                <b class="winner-name">KELLIE & GENESIS </b>
+            </div>
+
+            <div class="actions-btn-pages" id="btn-group-26">
+                <button class="btn-outline" onclick="prevPage(26)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(26)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page27">
+            <h2 class="big-text" id="h2-27">1st Year Mood</h2>
+
+            <!-- We keep id="p-27" so your JS still fades this whole block in! -->
+            <div class="par-text" id="p-27" style="width: 100%; text-align: center;">
+                <p style="font-size: clamp(16px, 3vw, 20px);">What was our collective "Mood" during 1st year?</p>
+
+                <div style="position: relative;">
+                    <div class="mood-glow"></div>
+                    <div class="mood-wrapper">
+                        <span class="mood-emoji">🤡</span>
+                        <span class="mood-emoji">💀</span>
+                        <span class="mood-emoji">🤪</span>
+                        <span class="mood-emoji">💦</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions-btn-pages" id="btn-group-27">
+                <button class="btn-outline" onclick="prevPage(27)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(27)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <!-- =================== INDIVIDUAL MESSAGES =================== -->
+        <div class="page profiles hidden" id="page28">
+            <h2 class="big-text" id="h2-28">Message In The Bottle</h2>
+            <p class="par-text text-left" id="p-28">MAGSILEAVE NA KAYO SA GC BAGO TAYO MAGAWAY-AWAY</p>
+            <div class="actions-btn-pages" id="btn-group-28">
+                <button class="btn-outline" onclick="prevPage(28)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(28)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page29">
+            <h2 class="big-text" id="h2-29">Message In The Bottle</h2>
+            <p class="par-text text-left" id="p-29">YEOROBUN WE GOT THIS</p>
+            <div class="actions-btn-pages" id="btn-group-29">
+                <button class="btn-outline" onclick="prevPage(29)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(29)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page30">
+            <h2 class="big-text" id="h2-30">Message In The Bottle</h2>
+            <p class="par-text text-left" id="p-30">Thank you everyone sa mga ramdom moments, sponty trips, and many
+                more. Di ko inexpect na magiging close tayo kasi akala ko ang tataas ng standards ninyo (which is totoo
+                naman). But you guys accepted me as who I am. You guys are so amazing and genuinely the best plot twist
+                of my first year. From our random breakdowns to our loudest tawanans, hindi ko akalain na makakahanap
+                ako ng ganitong klaseng pamilya sa college. <br><br> Thank you for making the heaviest days feel
+                lighter, and for being my solid support system sa BTLED. Cheers to surviving Year 1, and to making more
+                chaotic but beautiful memories together. <br><br> Mahal na mahal ko kayo!</p>
+            <div class="actions-btn-pages" id="btn-group-30">
+                <button class="btn-outline" onclick="prevPage(30)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(30)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page31">
+            <h2 class="big-text" id="h2-31">Message In The Bottle</h2>
+            <p class="par-text text-left" id="p-31">hello, balugs! hindi sumagi sa isip ko na magiging close tayo dahil
+                hindi nga ako gano’n kaagad naging open sa inyo pero ang gaan pala sa loob dahil hinayaan ko kayong
+                pumasok sa buhay ko. narealize ko na gusto ko kayong i-treasure sa buhay ko nung time na kahit wala
+                tayong pasok, pumunta kayo ng school para ayusan kami for photoshoot. na kahit mainit, kahit ang aga—
+                nandun kayo para suportahan ako.<br><br>
+
+                proud na proud ako sa atin kasi kahit papaano, may improvements na tayo— mula academics hanggang sa
+                individual growth. excited pa ako na makita tayong mag-grow nang magkakasama. sana sana sana 🤞🏻 tayo
+                tayo pa rin sa 2nd year, 3rd year, at 4th year. sana sana sana 🤞🏻 kung ano man ‘yung mga dalangin
+                natin sa araw araw, sana matupad. sana maging atin.<br><br>
+
+                proud ako sa atin, balugs! at proud din ako sa future self natin!</p>
+            <div class="actions-btn-pages" id="btn-group-31">
+                <button class="btn-outline" onclick="prevPage(31)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(31)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page profiles hidden" id="page32">
+            <h2 class="big-text" id="h2-32">Message In The Bottle</h2>
+            <p class="par-text text-left" id="p-32">Mahal ko kayo, guys. Thank you so much sa tulong lalo na sa mga
+                quiz, exam etc. i hope tayo parin ang mag classmates next year, tayo parin sana ang mag cof. Mahal na
+                mahaaaaal ko kayo from the bottom of my heart 🥺💚</p>
+            <div class="actions-btn-pages" id="btn-group-32">
+                <button class="btn-outline" onclick="prevPage(32)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(32)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <!-- =================== MEDIA SLIDES =================== -->
+        <!-- Carousel Groupfie -->
+        <div class="page hidden" id="page33">
+            <h2 class="big-text" id="h2-33">Swipe the Memories</h2>
+            <div class="carousel-container" id="carousel-33">
+                <img src="Resources/Pictures/ac (1).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (1).jpg" class="carousel-item">
+                <img src="Resources/Pictures/ac (2).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (2).jpg" class="carousel-item">
+                <img src="Resources/Pictures/ac (3).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (3).jpg" class="carousel-item">
+                <img src="Resources/Pictures/ac (4).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (4).jpg" class="carousel-item">
+                <img src="Resources/Pictures/ac (5).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (6).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (6).jpg" class="carousel-item">
+                <img src="Resources/Pictures/ac (7).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (8).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (9).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (10).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (11).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (12).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (13).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ac (15).jpeg" class="carousel-item">
+                <img src="Resources/Pictures/ab (1).jpg" class="carousel-item">
+                <img src="Resources/Pictures/ab (2).jpg" class="carousel-item">
+                <img src="Resources/Pictures/ab (3).jpg" class="carousel-item">
+                <img src="Resources/Pictures/ab (4).jpg" class="carousel-item">
+                <img src="Resources/Pictures/ab (5).jpg" class="carousel-item">
+                <img src="Resources/Pictures/ab (6).jpg" class="carousel-item">
+            </div>
+            <div class="actions-btn-pages" id="btn-group-33">
+                <button class="btn-outline" onclick="prevPage(33)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(33)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page hidden" id="page34">
+            <h2 class="big-text" id="h2-34">Nostalgia will be death of me</h2>
+            <p class="par-text" id="p-34" style="margin-bottom: 10px;">Play this when you miss the chaos.</p>
+            <div id="vid-34"></div>
+            <div class="actions-btn-pages" id="btn-group-34">
+                <button class="btn-outline" onclick="prevPage(34)"><i class="ri-arrow-left-line"></i></button>
+                <button class="btn-outline" onclick="nextPage(34)"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+
+        <div class="page hidden" id="page35">
+            <img src="Resources/Pictures/ac (7).jpeg" class="featured-img" id="img-35" alt="Groupfie" />
+            <h2 class="big-text" id="h2-35">BYAHENG 2nd YEAR!</h2>
+            <p class="par-text" id="p-35">Padayon. One year down, three to go.</p>
+            <div class="actions-btn-pages" id="btn-group-35">
+                <button class="btn-outline" onclick="replayArchive()"><i class="ri-refresh-line"></i> Replay
+                    Archive</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span class="footer-main">Samahan ng mga Baluga</span>
+        <span class="footer-sub">by Mark Espora</span>
+    </footer>
+
+    <script>
+        /* === CONFIGURATION === */
+        const TOTAL_PAGES = 35;
+        let currentPage = 0;
+        const DEV_START_PAGE = 0;
+
+        const audioPlayer = new Audio();
+        audioPlayer.loop = true;
+        let isMuted = false;
+
+        const transitionAudio = new Audio();
+        transitionAudio.volume = 0.4;
+
+        let transitionTimer;
+        let autoAdvanceTimer = null;
+
+        function playTransitionSound() {
+            if (!isMuted) {
+                if (transitionTimer) {
+                    clearTimeout(transitionTimer);
+                }
+
+                const randomNum = Math.floor(Math.random() * 3) + 1;
+
+                transitionAudio.src = `Resources/t${randomNum}.mp3`;
+                transitionAudio.currentTime = 0;
+                transitionAudio.play().catch(e => console.log("Transition blocked:", e));
+
+                transitionTimer = setTimeout(() => {
+                    transitionAudio.pause();
+                    transitionAudio.currentTime = 0;
+                }, 3000);
+            }
+        }
+        // ------------------------------------------
+
+        const slideAudioMap = {
+            1: 'Resources/1.mp3',
+            4: 'Resources/2.mp3',
+            7: 'Resources/3.mp3',
+            8: 'Resources/31.mp3',
+            9: 'Resources/32.mp3',
+            10: 'Resources/33.mp3',
+            11: 'Resources/34.mp3',
+            12: 'Resources/35.mp3',
+            13: 'Resources/4.mp3',
+            14: 'Resources/14.mp3',
+            16: 'Resources/16.mp3',
+            21: 'Resources/21.mp3',
+            24: '',
+            25: 'Resources/25.mp3',
+            28: 'Resources/28.mp3',
+            33: 'Resources/331.mp3',
+            34: 'Resources/341.mp3',
+            35: 'Resources/351.mp3',
+        };
+
+        /* === PRELOADER LOGIC === */
+        function initPreloader() {
+            const imagesToLoad = [...document.images];
+            const bgImages = [
+                'https://i.pinimg.com/originals/67/03/1c/67031c23c4c06d8a58b4d75e61cba78a.jpg'
+            ];
+
+            let totalAssets = imagesToLoad.length + bgImages.length + Object.keys(slideAudioMap).length;
+            let loadedAssets = 0;
+            const progressBar = document.getElementById('load-progress');
+
+            const failsafe = setTimeout(completeLoading, 5000);
+
+            function checkDone() {
+                loadedAssets++;
+                if (progressBar) progressBar.style.width = `${(loadedAssets / totalAssets) * 100}%`;
+                if (loadedAssets >= totalAssets) {
+                    clearTimeout(failsafe);
+                    setTimeout(completeLoading, 400);
+                }
+            }
+
+            function completeLoading() {
+                const preloader = document.getElementById('preloader');
+                if (!preloader) return;
+                preloader.style.opacity = '0';
+                setTimeout(() => { preloader.style.display = 'none'; }, 800);
+            }
+
+            if (totalAssets === 0) completeLoading();
+
+            imagesToLoad.forEach(img => {
+                if (img.complete) checkDone();
+                else { img.onload = checkDone; img.onerror = checkDone; }
+            });
+
+            bgImages.forEach(src => {
+                const img = new Image();
+                img.onload = checkDone; img.onerror = checkDone;
+                img.src = src;
+            });
+
+            Object.values(slideAudioMap).forEach(src => {
+                const aud = new Audio();
+                aud.oncanplaythrough = checkDone;
+                aud.onerror = checkDone;
+                aud.src = src;
+            });
+        }
+
+        /* === INITIALIZATION === */
+        document.addEventListener("DOMContentLoaded", function () {
+            initPreloader();
+            createIndicators();
+            startImageSwapper();
+
+            const form = document.getElementById("entryForm");
+
+            if (DEV_START_PAGE > 0) {
+                // --- DEV SKIP MODE ---
+                form.innerHTML = `
+            <button class="btn-outline" style="background: #333; color: white; border: 2px solid white; padding: 15px 30px; font-size: 20px; font-family: Arial;" type="button" id="devSkipBtn">
+                🚀 Skip to Page ${DEV_START_PAGE}
+            </button>
+        `;
+
+                document.getElementById("devSkipBtn").addEventListener("click", function () {
+                    form.style.display = "none";
+                    document.getElementById("mainHeader").style.display = "none";
+                    document.getElementById("stage").style.display = "none";
+                    document.getElementById("overlay").style.display = "flex";
+
+                    document.getElementById("h2-2").textContent = "Hi, Tester";
+                    document.getElementById("avatar2").src = "https://api.dicebear.com/9.x/pixel-art/svg?seed=Tester";
+
+                    nextPage(DEV_START_PAGE - 1);
+                });
+
+            } else {
+                form.addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    let userInput = document.getElementById("passcodeInput").value.trim();
+                    if (userInput) {
+                        form.querySelector("button").disabled = true;
+                        enterArchive(userInput);
+                    }
+                });
+            }
+        });
+
+        /* === AUDIO CONTROLS === */
+        function playLocalAudio(slideIndex) {
+            if (slideAudioMap[slideIndex] && slideAudioMap[slideIndex] !== '') {
+                audioPlayer.src = slideAudioMap[slideIndex];
+                audioPlayer.muted = isMuted;
+                audioPlayer.play().catch(e => console.log("Autoplay blocked:", e));
+            }
+        }
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            audioPlayer.muted = isMuted;
+            transitionAudio.muted = isMuted;
+            if (typeof snippetPlayer !== 'undefined') snippetPlayer.muted = isMuted;
+
+            const btnIcon = document.querySelector(".mute-btn i");
+            btnIcon.classList.toggle("ri-volume-up-fill", !isMuted);
+            btnIcon.classList.toggle("ri-volume-mute-fill", isMuted);
+        }
+
+        /* === STOP MEDIA HELPER === */
+        function stopMedia(pageElement) {
+            if (!pageElement) return;
+
+            if (typeof snippetPlayer !== 'undefined' && !snippetPlayer.paused) {
+                snippetPlayer.pause();
+                if (snippetTimer) clearTimeout(snippetTimer);
+                if (activeSongBtn) activeSongBtn.innerHTML = '<i class="ri-play-fill"></i>';
+            }
+
+            const videos = pageElement.querySelectorAll('video');
+            videos.forEach(video => {
+                video.pause();
+            });
+
+            if (pageElement.id === 'page34') {
+                if (typeof ytPlayer !== 'undefined' && ytPlayer.pauseVideo) {
+                    ytPlayer.pauseVideo();
+                    if (!isMuted) audioPlayer.play();
+                }
+            } else {
+                const iframes = pageElement.querySelectorAll('iframe');
+                iframes.forEach(iframe => {
+                    if (iframe.id !== 'vid-34') {
+                        const src = iframe.src;
+                        iframe.src = src;
+                    }
+                });
+            }
+        }
+
+        function resetSlide(pageIndex) {
+            const pageElement = document.getElementById(`page${pageIndex}`);
+            if (!pageElement) return;
+
+            pageElement.style.opacity = "";
+            pageElement.style.transform = "";
+
+            const animatedElements = pageElement.querySelectorAll('.big-text, .par-text, .custom-list, .featured-img:not(.award-frame), .photo-album, .carousel-container, iframe, .actions-btn-pages, #cramming-followup');
+            animatedElements.forEach(el => {
+                el.style.opacity = "0";
+                el.classList.remove("slideFromTopFadeIn", "fadeIn", "slideUpOpacity", "centerToLeft", "rightToCenter", "slideToMiddle", "slide-to-middle");
+            });
+
+            // Specific resets
+            const counterBox = pageElement.querySelector('[id^="counter-container-"]');
+            if (counterBox) counterBox.style.opacity = "0";
+
+            const playlistBox = pageElement.querySelector('[id^="playlist-container-"]');
+            if (playlistBox) playlistBox.style.opacity = "0";
+
+            const revealBox = pageElement.querySelector('.winner-reveal');
+            if (revealBox) revealBox.classList.remove('show');
+        }
+
+        /* === ENTRY SEQUENCE === */
+        function enterArchive(userName) {
+            const stage = document.getElementById("stage");
+            const inputContainer = document.getElementById("name-input-container");
+            const header = document.getElementById("mainHeader");
+            const subtitle = document.getElementById("subtitle");
+
+            document.getElementById("h2-2").textContent = "Hi, " + userName;
+            document.getElementById("avatar2").src = "https://api.dicebear.com/9.x/pixel-art/svg?seed=" + userName;
+
+            inputContainer.classList.add("fade-out");
+
+            setTimeout(() => {
+                inputContainer.style.display = "none";
+                header.style.transform = "translateY(20px)";
+                subtitle.classList.add("show");
+                stage.classList.remove("open");
+            }, 500);
+
+            setTimeout(() => {
+                header.style.opacity = "0";
+            }, 2000);
+
+            setTimeout(() => {
+                document.getElementById('entryForm').style.display = "none";
+                document.getElementById('overlay').style.display = 'flex';
+            }, 3200);
+
+            setTimeout(() => {
+                stage.classList.add("open");
+                nextPage(0);
+            }, 3800);
+
+            setTimeout(() => {
+                stage.style.display = "none";
+            }, 6500);
+        }
+
+        /* === PAGINATION SYSTEM === */
+        function createIndicators() {
+            const container = document.getElementById('storyIndicators');
+            container.innerHTML = '';
+            for (let i = 0; i < TOTAL_PAGES; i++) {
+                const bar = document.createElement('div');
+                bar.classList.add('indicator');
+                bar.id = `indicator-${i + 1}`;
+                container.appendChild(bar);
+            }
+        }
+
+        function updateStoryIndicator(targetPage, autoAdvance = false, durationSeconds = 7) {
+            for (let i = 0; i < TOTAL_PAGES; i++) {
+                const indicator = document.getElementById(`indicator-${i + 1}`);
+                if (!indicator) continue;
+                indicator.className = 'indicator';
+
+                if (i < targetPage - 1) {
+                    indicator.classList.add('static');
+                } else if (i === targetPage - 1) {
+                    if (autoAdvance) {
+                        indicator.classList.add('fill');
+                        indicator.style.setProperty('--fill-duration', `${durationSeconds}s`);
+                    } else {
+                        indicator.classList.add('static');
+                    }
+                }
+            }
+        }
+
+        /* === UPDATED: NAVIGATION SYSTEM === */
+        function nextPage(currentPageIndex) {
+            playTransitionSound();
+            clearTimeout(autoAdvanceTimer); // Stop auto-advancing if user clicks button
+
+            let current = document.getElementById(`page${currentPageIndex}`);
+            let next = document.getElementById(`page${currentPageIndex + 1}`);
+
+            if (current) {
+                stopMedia(current);
+                resetSlide(currentPageIndex);
+                current.classList.add('hidden');
+            }
+            if (next) {
+                next.classList.remove('hidden');
+                resetSlide(currentPageIndex + 1);
+                runSlide(currentPageIndex + 1);
+            }
+        }
+
+        function prevPage(currentPageIndex) {
+            playTransitionSound();
+            clearTimeout(autoAdvanceTimer); // Stop auto-advancing if user clicks button
+
+            let current = document.getElementById(`page${currentPageIndex}`);
+            let prev = document.getElementById(`page${currentPageIndex - 1}`);
+
+            if (current) {
+                stopMedia(current);
+                resetSlide(currentPageIndex);
+                current.classList.add('hidden');
+            }
+            if (prev) {
+                prev.classList.remove('hidden');
+                resetSlide(currentPageIndex - 1);
+                runSlide(currentPageIndex - 1);
+            }
+        }
+
+        /* === ANIMATION HELPER === */
+        function animateEl(id, animClass, delay = 0) {
+            const el = document.getElementById(id);
+            if (el) {
+                setTimeout(() => {
+                    const parentPage = el.closest('.page');
+                    if (parentPage && parentPage.classList.contains('hidden')) return;
+
+                    el.style.opacity = "1";
+                    el.classList.add(animClass);
+                    setTimeout(() => el.classList.remove(animClass), 2000);
+                }, delay);
+            }
+        }
+
+        function replayArchive() {
+            clearTimeout(autoAdvanceTimer);
+            let lastPage = document.getElementById(`page${TOTAL_PAGES}`);
+            if (lastPage) {
+                stopMedia(lastPage);
+                resetSlide(TOTAL_PAGES);
+                lastPage.classList.add('hidden');
+            }
+            updateStoryIndicator(1, false);
+
+            let firstPage = document.getElementById('page1');
+            firstPage.classList.remove('hidden');
+            currentPage = 1;
+
+            resetSlide(1);
+            runSlide(1);
+        }
+
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var ytPlayer;
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('vid-34', {
+                videoId: 'LnqRq-MB8Pw',
+                playerVars: {
+                    'controls': 0,
+                    'rel': 0,
+                    'enablejsapi': 1,
+                    'origin': window.location.origin
+                },
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                nextPage(34);
+            }
+        }
+
+        function shootWords() {
+            const vault = document.getElementById("word-vault");
+            vault.innerHTML = "";
+
+            const pinoyQuotes = [
+                "Malapit na ako!", "Diko alam :>", "Keri yan!", "Sino may extra ballpen?", "“review tayo mamaya” */nagchismisan,",
+                "Bawi sa finals", "mura lang, e 😓", "Luh, may quiz?", "San tayo?", "Magre-review na talaga ako bukas",
+                "Huling absent ko na 'to", "wyt?", "Pinipilahan?", "Ano Tara?", "Mag-popokpok nalang ako.", "Uy lumalaki 😜😜",
+                "Mag-aasawa nalang ako", "Mag-drodrop nako", "ANG INITTT", "Dimples ni Sir Ruel", "Pautang 50", "May laman Gcash mo?",
+                "Sana all", "G!", "Pa Kopya.", "Wait lang naliligo pa", "Omsim", "Monetskii", "Mas madami pang bading, kaysa sa puno.", "wala",
+                "Nasa jeep na ako", "Wait, check ko", "Teh, help!", "Geh geh", "Pa-connect!", "BALUGAAAAAAAA", "bak is la", "Drop out na tayo", "bawi bawi",
+                "Tulog muna 15 mins", "Di ko gets", "Late na ako", "Papasa tayo dito", "It is what it is", "baluga talaga ‘to, akala niyo laging inaaway e"
+            ];
+
+            pinoyQuotes.sort(() => Math.random() - 0.5);
+
+            const numLanes = 8;
+
+            pinoyQuotes.forEach((text, index) => {
+                const span = document.createElement("span");
+                span.classList.add("flying-word");
+                span.textContent = text;
+
+                const laneIndex = index % numLanes;
+                const baseTop = 5 + (laneIndex * 11);
+                const randomTopJitter = Math.random() * 3;
+
+                const baseDelay = index * 0.4;
+                const randomDelayJitter = Math.random() * 0.3;
+
+                const randomDuration = Math.random() * 3 + 5;
+                const randomSize = Math.floor(Math.random() * 8) + 12;
+                const randomOpacity = Math.random() * 0.5 + 0.4;
+
+                span.style.top = `${baseTop + randomTopJitter}%`;
+                span.style.animationDuration = `${randomDuration}s`;
+                span.style.animationDelay = `${baseDelay + randomDelayJitter}s`;
+                span.style.fontSize = `${randomSize}px`;
+                span.style.opacity = randomOpacity;
+
+                vault.appendChild(span);
+
+                const totalLifeTime = (baseDelay + randomDelayJitter + randomDuration + 1) * 2000;
+                setTimeout(() => { span.remove(); }, totalLifeTime);
+            });
+        }
+
+        /* === NUMBER COUNTER ANIMATION === */
+        function animateCounter(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            if (!obj) return;
+
+            obj.innerHTML = start;
+
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+
+                const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+
+                obj.innerHTML = Math.floor(easeOutProgress * (end - start) + start);
+
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.innerHTML = end + "+";
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        /* === PLAYLIST LOGIC === */
+        const playlistData = [
+            { title: "Umaaraw, umuulan", artist: "rivermaya", cover: "Resources/3.jpg", audio: "Resources/36.mp3" },
+            { title: "Minsan ", artist: "munimuni", cover: "Resources/1.jpg", audio: "Resources/1.mp3" },
+            { title: "Thats What Friends Are For", artist: "Dionne Warwick", cover: "Resources/2.jpg", audio: "Resources/351.mp3" },
+            { title: "Pagbigyang Muli", artist: "Erik Santos", cover: "Resources/4.jpg", audio: "Resources/p5.mp3" }
+        ];
+
+        const snippetPlayer = new Audio();
+        let snippetTimer;
+        let activeSongBtn = null;
+
+        function renderPlaylist() {
+            const container = document.getElementById('playlist-container-24');
+            if (!container) return;
+            container.innerHTML = "";
+
+            playlistData.forEach((song, index) => {
+                const fallbackImg = `https://placehold.co/100x100/333/fff?text=${index + 1}`;
+
+                container.innerHTML += `
+            <div class="song-row">
+                <img src="${song.cover}" onerror="this.src='${fallbackImg}'" class="song-cover" alt="cover">
+                <div class="song-info">
+                    <div class="song-title">${song.title}</div>
+                    <div class="song-artist">${song.artist}</div>
+                </div>
+                <button class="play-btn" id="play-btn-${index}" onclick="playSnippet('${song.audio}', this, ${index})">
+                    <i class="ri-play-fill"></i>
+                </button>
+            </div>
+        `;
+            });
+        }
+
+        /* === ALTERNATING IMAGES LOGIC === */
+        function startImageSwapper() {
+            setInterval(() => {
+                const altImages = document.querySelectorAll('.alternating-img');
+
+                altImages.forEach(img => {
+                    img.classList.add('img-fade-out');
+
+                    setTimeout(() => {
+                        const img1 = img.getAttribute('data-img1');
+                        const img2 = img.getAttribute('data-img2');
+
+                        if (img.getAttribute('src') === img1) {
+                            img.setAttribute('src', img2);
+                        } else {
+                            img.setAttribute('src', img1);
+                        }
+
+                        img.classList.remove('img-fade-out');
+                    }, 500);
+                });
+            }, 3000);
+        }
+
+        function playSnippet(songUrl, btnElement, index) {
+            snippetPlayer.muted = isMuted;
+
+            if (!snippetPlayer.paused && activeSongBtn === btnElement) {
+                snippetPlayer.pause();
+                clearTimeout(snippetTimer);
+                btnElement.innerHTML = '<i class="ri-play-fill"></i>';
+                return;
+            }
+
+            if (snippetTimer) clearTimeout(snippetTimer);
+            snippetPlayer.pause();
+
+            if (activeSongBtn && activeSongBtn !== btnElement) {
+                activeSongBtn.innerHTML = '<i class="ri-play-fill"></i>';
+            }
+
+            audioPlayer.pause();
+
+            activeSongBtn = btnElement;
+            activeSongBtn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i>';
+            snippetPlayer.src = songUrl;
+
+            snippetPlayer.onloadedmetadata = () => {
+                const duration = snippetPlayer.duration;
+                let randomStart = 0;
+                if (duration > 15) {
+                    randomStart = Math.random() * (duration - 15);
+                }
+
+                snippetPlayer.currentTime = randomStart;
+                snippetPlayer.play().then(() => {
+                    activeSongBtn.innerHTML = '<i class="ri-pause-fill"></i>';
+
+                    snippetTimer = setTimeout(() => {
+                        snippetPlayer.pause();
+                        activeSongBtn.innerHTML = '<i class="ri-play-fill"></i>';
+
+                        let nextIndex = (index + 1) % playlistData.length;
+                        const nextBtn = document.getElementById(`play-btn-${nextIndex}`);
+
+                        if (nextBtn) {
+                            nextBtn.click();
+                        }
+                    }, 15000);
+
+                }).catch(e => {
+                    console.log("Playback failed:", e);
+                    activeSongBtn.innerHTML = '<i class="ri-play-fill"></i>';
+                });
+            };
+        }
+        document.addEventListener("DOMContentLoaded", renderPlaylist);
+
+        /* === GENERIC SLIDE CONTROLLER === */
+        function runSlide(page) {
+            playLocalAudio(page);
+
+            const currentPageEl = document.getElementById(`page${page}`);
+            if (!currentPageEl) return;
+
+            const title = currentPageEl.querySelector('.big-text');
+            const imgOrMedia = currentPageEl.querySelector('.featured-img:not(.award-frame), .photo-album, .carousel-container, iframe');
+            const text = currentPageEl.querySelector('.par-text, .custom-list');
+            const btns = currentPageEl.querySelector('.actions-btn-pages');
+            const counterBox = document.getElementById(`counter-container-${page}`);
+            const playlistBox = document.getElementById(`playlist-container-${page}`);
+            const revealBox = document.getElementById(`reveal-container-${page}`);
+
+            if (title) animateEl(title.id, "slideFromTopFadeIn", 0);
+            if (imgOrMedia) animateEl(imgOrMedia.id, "fadeIn", 500);
+            if (text) animateEl(text.id, "slideUpOpacity", 1000);
+            if (btns) animateEl(btns.id, "fadeIn", 1500);
+            if (counterBox) animateEl(counterBox.id, "slideUpOpacity", 1200);
+            if (playlistBox) animateEl(playlistBox.id, "slideUpOpacity", 1200);
+
+            if (revealBox) {
+                revealBox.classList.remove('show');
+                setTimeout(() => {
+                    revealBox.classList.add('show');
+                }, 2500);
+            }
+
+            if (playlistBox) animateEl(playlistBox.id, "slideUpOpacity", 1200);
+
+            clearTimeout(autoAdvanceTimer);
+
+            if (page === 1) {
+                animateEl("page1", "centerToLeft", 5000);
+                updateStoryIndicator(1, true, 7);
+                autoAdvanceTimer = setTimeout(() => nextPage(1), 6000);
+            } else if (page === 2) {
+                animateEl("page2", "centerToLeft", 6000);
+                updateStoryIndicator(2, true, 8);
+                autoAdvanceTimer = setTimeout(() => nextPage(2), 7000);
+            } else if (page === 13) {
+                shootWords();
+                updateStoryIndicator(13, true, 22);
+                autoAdvanceTimer = setTimeout(() => nextPage(13), 22000);
+
+            } else if (page === 24) {
+                updateStoryIndicator(24, false);
+                audioPlayer.pause();
+                setTimeout(() => {
+                    const firstBtn = document.getElementById('play-btn-0');
+                    if (firstBtn && snippetPlayer.paused) {
+                        firstBtn.click();
+                    }
+                }, 1200);
+
+            } else if (page === 25) {
+                updateStoryIndicator(25, false);
+                setTimeout(() => {
+                    animateCounter("cramming-number", 0, 356, 3500);
+                }, 1200);
+                animateEl("cramming-followup", "slideUpOpacity", 4700);
+
+            } else if (page === 34) {
+                updateStoryIndicator(34, false);
+
+                function tryPlayYT() {
+                    if (typeof ytPlayer !== 'undefined' && ytPlayer.playVideo) {
+                        ytPlayer.playVideo();
+                    } else {
+                        setTimeout(tryPlayYT, 500);
+                    }
+                }
+                tryPlayYT();
+
+            } else {
+                updateStoryIndicator(page, false);
+            }
+        }
+    </script>
+</body>
+
+</html>
