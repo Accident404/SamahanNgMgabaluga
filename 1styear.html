@@ -1813,7 +1813,7 @@
             pageElement.style.opacity = "";
             pageElement.style.transform = "";
 
-            const animatedElements = pageElement.querySelectorAll('.big-text, .par-text, .custom-list, .featured-img:not(.award-frame), .photo-album, .carousel-container, iframe, .actions-btn-pages, #cramming-followup');
+            const animatedElements = pageElement.querySelectorAll('.avatar, .big-text, .par-text, .custom-list, .featured-img:not(.award-frame), .photo-album, .carousel-container, iframe, .actions-btn-pages, #cramming-followup');
             animatedElements.forEach(el => {
                 el.style.opacity = "0";
                 el.classList.remove("slideFromTopFadeIn", "fadeIn", "slideUpOpacity", "centerToLeft", "rightToCenter", "slideToMiddle", "slide-to-middle");
@@ -2191,7 +2191,7 @@
             if (!currentPageEl) return;
 
             const title = currentPageEl.querySelector('.big-text');
-            const imgOrMedia = currentPageEl.querySelector('.featured-img:not(.award-frame), .photo-album, .carousel-container, iframe');
+            const imgOrMedia = currentPageEl.querySelector('.avatar, .featured-img:not(.award-frame), .photo-album, .carousel-container, iframe');
             const text = currentPageEl.querySelector('.par-text, .custom-list');
             const btns = currentPageEl.querySelector('.actions-btn-pages');
             const counterBox = document.getElementById(`counter-container-${page}`);
